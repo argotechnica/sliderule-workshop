@@ -1,4 +1,4 @@
-setwd("C:/Client/Classes/Data Science Workshop (Sliderule)/UD651 Data Analysis with R")
+setwd("C:/Client/GitHub/sliderule-workshop/3.3_dive-into-eda")
 
 library(ggplot2)
 
