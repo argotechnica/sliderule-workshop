@@ -1,13 +1,12 @@
-Codebook for SlideRule Data Wrangling Project
- =======
+#Codebook for SlideRule Data Wrangling Project
+Codebook describing the variables, data, and any transformations or work
+performed to clean up the data varaibles, for the "Data Wrangling Project"
+assignment in Lesson 4.1 - Dplyr of SlideRule's Intro to Data Science
+workshop, using the "Human Activity Recognition Using Smartphones" data set
  
- ### Data wrangling project using dplyr and "Human Activity Recognition
- Using Smartphones" data set
- 
- Dataset Notes
- =======
- Dataset created as an activity for learning more about R's dplyr package
- by manipulating a dataset created for this publication:
+##Dataset Notes
+Dataset created as an activity for learning more about R's dplyr package
+by manipulating a dataset created for this publication:
  
  Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-
  Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-
@@ -38,8 +37,8 @@ Codebook for SlideRule Data Wrangling Project
 	 * select - To selectively grab data.
 	 * summarise_each - To get means of multiple columns simultaneously.
  
- Variables and Values
- =======
+##Variables and Values
+```
  Variable Name                       Type  Value Description
  SubjectID                           int   
  ActivityID                          int   
@@ -130,3 +129,4 @@ Codebook for SlideRule Data Wrangling Project
  fBodyBodyAccJerkMag.std             num   Mean of std dev. of observations
  fBodyBodyGyroMag.std                num   Mean of std dev. of observations
  fBodyBodyGyroJerkMag.std            num   Mean of std dev. of observations
+```
