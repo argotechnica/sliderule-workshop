@@ -33,14 +33,16 @@ tweets.df <- twListToDF(tweets.list)
 tweets.df <- filter(tweets.df, isRetweet == FALSE)
 tweets.df$text <- str_replace_all(tweets.df$text,"[^[:graph:]]", " ")
 
-# build a clean word corpus, e.g. remove punctuation, numbers, stopwords...
-tweets.corpus <- Corpus(VectorSource(tweets.df$text))
-tweets.corpus <- tm_map(tweets.corpus, tolower)
-tweets.corpus <- tm_map(tweets.corpus, removePunctuation)
-tweets.corpus <- tm_map(tweets.corpus, removeNumbers)
-tweets.corpus <- tm_map(tweets.corpus, removeWords, stopwords("english"))
+write.csv(tweets.df, file = paste0("tweets.df.",format(Sys.time(), "%Y-%m-%d.%H%M"),".txt"))
 
-inspect(tweets.corpus[1:3])
+############ SKIP BELOW FOR NOW
+
+# build a clean word corpus, e.g. remove punctuation, numbers, stopwords...
+# tweets.corpus <- Corpus(VectorSource(tweets.df$text))
+# tweets.corpus <- tm_map(tweets.corpus, tolower)
+# tweets.corpus <- tm_map(tweets.corpus, removePunctuation)
+# tweets.corpus <- tm_map(tweets.corpus, removeNumbers)
+# tweets.corpus <- tm_map(tweets.corpus, removeWords, stopwords("english"))
 
 "
 maybe use these at some point?
