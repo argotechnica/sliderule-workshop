@@ -1,5 +1,6 @@
 setwd("C:\\Client\\Classes\\Data Science Workshop (Sliderule)\\5 Analyzing Datasets\\Analytics Edge, The (MITx)\\06 Clustering")
 
+## I think I like how your libraries go at the top.  Also how you do an absolute path as above -- very repeatable.
 library(caret)
 library(caTools)
 library(flexclust)
@@ -31,6 +32,7 @@ kos.5 <- subset(kos, kos.clusters==5)
 kos.6 <- subset(kos, kos.clusters==6)
 kos.7 <- subset(kos, kos.clusters==7)
 # approach 2
+#nice!
 table(kos.clusters)
 
 # 1.5 - Hierarchical Clustering
@@ -45,6 +47,8 @@ tail(sort(colMeans(kos.7)))
 # 2.1 - K-Means Clustering
 set.seed(1000)
 KMC = kmeans(kos, centers = 7)
+# I had to get at the cluster 1 
+# kmc[1]$cluster.  It looks like this might be a similar idea with different syntax?
 kos.k1 <- subset(kos, KMC$cluster==1)
 kos.k2 <- subset(kos, KMC$cluster==2)
 kos.k3 <- subset(kos, KMC$cluster==3)
@@ -54,6 +58,8 @@ kos.k6 <- subset(kos, KMC$cluster==6)
 kos.k7 <- subset(kos, KMC$cluster==7)
 
 # 2.2 - K-Means Clustering
+# Interesting to me that tail does 6 most frequent words since
+# there's no parameter specifying size of the tail we want to see?
 tail(sort(colMeans(kos.1)))
 tail(sort(colMeans(kos.k1)))
 tail(sort(colMeans(kos.2)))
@@ -76,11 +82,19 @@ rm(list = ls())
 airlines <- read.csv("AirlinesCluster.csv")
 
 # 1.1 - Normalizing the Data 
+# Hope you might remind me about sapply also.  I think
+#  I got a little carried away with lapply when sapply or tapply 
+#  may have been more appropriate.
 sort(sapply(airlines, mean, na.rm=TRUE))
 
 # 1.3 - Normalizing the Data
+# Preprocess is MAGIC!
 preproc = preProcess(airlines)
+# Is there a time when we wouldn't want to normalize our data first?
+#  I think I'd have to dig more into the normalization equation but 
+#  intuitively it shouldn't alter the data much if it's all pretty close together, right?
 airlinesNorm = predict(preproc, airlines)
+# much nicer and more reusable than my kludged lapply call.
 sort(sapply(airlinesNorm, max, na.rm=TRUE))
 sort(sapply(airlinesNorm, min, na.rm=TRUE))
 
@@ -94,6 +108,8 @@ airlines.hc = cutree(clusters, k = 5)
 table(airlines.hc)
 
 # 2.3-2.7 - Hierarchical Clustering
+# let's review the tapply function if that's ok with you, I
+# think I've kind of forgotten how it works. And I overcomplicated my response to these questions.
 tapply(airlines$Balance, airlines.hc, mean)
 tapply(airlines$QualMiles, airlines.hc, mean)
 tapply(airlines$BonusMiles, airlines.hc, mean)
@@ -126,6 +142,9 @@ mean(stocks$PositiveDec)
 
 # 1.3 - Exploring the Dataset
 sort(cor(stocks[1:11]))
+# Again, way nicer use of this function than what I did.
+#  Didn't recall that you could use it across a list and thought
+#  you could only do pairwise.  Thanks for showing me the light!
 cor(stocks[1:11])
 
 # 1.4 - Exploring the Dataset
@@ -139,6 +158,7 @@ stocksTest = subset(stocks, spl == FALSE)
 
 StocksModel <- glm(PositiveDec ~ ., stocksTrain, family = binomial)
 predict.StocksModel <- predict(StocksModel, type = "response")
+#WELCOME TO THE CONFUSION MATRIX
 table(stocksTrain$PositiveDec, predict.StocksModel > 0.5)
 (990+3640)/nrow(stocksTrain)
 
@@ -206,6 +226,8 @@ table(stocksTest3$PositiveDec, PredictTest3 > 0.5)
 (49+13)/nrow(stocksTest3)
 
 # 4.4 - Cluster-Specific Predictions
+#  I have an answer to this question, but I think I must have overwritten my file.
+#  Hope you don't mind if I swipe these lines for my file (not sure I'll ever come back to it but just in case.)
 AllPredictions = c(PredictTest1, PredictTest2, PredictTest3)
 AllOutcomes = c(stocksTest1$PositiveDec, stocksTest2$PositiveDec, stocksTest3$PositiveDec)
 table(AllOutcomes, AllPredictions > 0.5)
